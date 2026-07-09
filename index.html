@@ -90,11 +90,22 @@
       content: "📤 ";
     }
 
+    .btn-donate {
+      background: #f7931a;
+      color: white;
+      border: 2px solid #f7931a;
+    }
+
+    .btn-donate:hover {
+      background: #e07c0a;
+      transform: scale(1.02);
+    }
+
     .gallery-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
       gap: 1.8rem;
-      margin-bottom: 2.5rem;
+      margin-bottom: 1.5rem;
     }
 
     .cat-card {
@@ -140,7 +151,7 @@
 
     .send-area {
       text-align: center;
-      margin: 2.5rem 0 1.5rem;
+      margin: 2.5rem 0 2rem;
     }
 
     .send-area .btn {
@@ -158,6 +169,290 @@
       background: #3b3b4f;
       transform: scale(1.02);
       box-shadow: 0 12px 32px rgba(30,30,42,0.3);
+    }
+
+    /* ОПИСАНИЕ ПРОЕКТА */
+    .project-description {
+      background: white;
+      border-radius: 32px;
+      padding: 2rem 2.5rem;
+      margin: 2rem 0 1.5rem;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.04);
+      border-left: 6px solid #f9d56e;
+    }
+
+    .project-description h2 {
+      font-size: 1.5rem;
+      color: #1e1e2a;
+      margin-bottom: 0.8rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .project-description p {
+      color: #4a4a5a;
+      line-height: 1.7;
+      font-size: 1rem;
+    }
+
+    .project-description .highlight {
+      color: #f7931a;
+      font-weight: 600;
+    }
+
+    .project-description a {
+      color: #f7931a;
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    .project-description a:hover {
+      text-decoration: underline;
+    }
+
+    /* МОДАЛЬНОЕ ОКНО ПОДДЕРЖКИ */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.5);
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      backdrop-filter: blur(4px);
+      animation: fadeIn 0.3s ease;
+    }
+
+    .modal.show {
+      display: flex;
+    }
+
+    @keyframes fadeIn {
+      0% { opacity: 0; transform: scale(0.95); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+
+    .modal-content {
+      background: white;
+      border-radius: 48px;
+      padding: 2.5rem;
+      max-width: 540px;
+      width: 90%;
+      box-shadow: 0 24px 64px rgba(0,0,0,0.2);
+      position: relative;
+      text-align: center;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 1rem;
+      right: 1.5rem;
+      font-size: 2rem;
+      color: #999;
+      cursor: pointer;
+      transition: 0.2s;
+      border: none;
+      background: none;
+      line-height: 1;
+    }
+
+    .modal-close:hover {
+      color: #1e1e2a;
+      transform: rotate(90deg);
+    }
+
+    .modal-icon {
+      font-size: 3rem;
+      margin-bottom: 0.3rem;
+    }
+
+    .modal h2 {
+      font-size: 1.8rem;
+      margin-bottom: 0.3rem;
+      color: #1e1e2a;
+    }
+
+    .modal .subtitle {
+      color: #6a6a7a;
+      font-size: 0.9rem;
+      margin-bottom: 1.2rem;
+    }
+
+    /* Крипто-валюты переключатель */
+    .crypto-tabs {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 1.2rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .crypto-tab {
+      background: #f0ede8;
+      border: 2px solid transparent;
+      padding: 0.6rem 1.2rem;
+      border-radius: 40px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: 0.2s;
+      color: #4a4a5a;
+      flex: 1;
+      min-width: 80px;
+    }
+
+    .crypto-tab.active {
+      background: #1e1e2a;
+      color: white;
+      border-color: #1e1e2a;
+    }
+
+    .crypto-tab:hover:not(.active) {
+      background: #e0dbd3;
+    }
+
+    .crypto-tab.btc.active {
+      background: #f7931a;
+      border-color: #f7931a;
+      color: white;
+    }
+
+    .crypto-tab.ton.active {
+      background: #0088cc;
+      border-color: #0088cc;
+      color: white;
+    }
+
+    .crypto-tab.pepe.active {
+      background: #4CAF50;
+      border-color: #4CAF50;
+      color: white;
+    }
+
+    /* Блок с адресом */
+    .address-block {
+      background: #f7f3eb;
+      border-radius: 24px;
+      padding: 1.2rem 1.5rem;
+      border: 2px solid #ddd8d0;
+      margin-bottom: 1.2rem;
+      text-align: left;
+      transition: border-color 0.3s;
+    }
+
+    .address-block.btc-active {
+      border-color: #f7931a;
+    }
+
+    .address-block.ton-active {
+      border-color: #0088cc;
+    }
+
+    .address-block.pepe-active {
+      border-color: #4CAF50;
+    }
+
+    .address-label {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 600;
+      font-size: 0.85rem;
+      color: #1e1e2a;
+      margin-bottom: 0.5rem;
+    }
+
+    .address-label .crypto-icon {
+      font-size: 1.5rem;
+    }
+
+    .address-label .network {
+      font-weight: 400;
+      color: #6a6a7a;
+      font-size: 0.8rem;
+    }
+
+    .address-text {
+      font-family: 'Courier New', monospace;
+      font-size: 0.85rem;
+      color: #1e1e2a;
+      word-break: break-all;
+      background: white;
+      padding: 0.8rem 1rem;
+      border-radius: 16px;
+      margin-bottom: 0.8rem;
+      line-height: 1.6;
+      border: 1px solid #e0d8d0;
+    }
+
+    .address-actions {
+      display: flex;
+      gap: 0.8rem;
+      flex-wrap: wrap;
+    }
+
+    .address-actions .btn-copy {
+      flex: 1;
+      background: #1e1e2a;
+      color: white;
+      border: none;
+      padding: 0.7rem;
+      border-radius: 30px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      font-weight: 600;
+      transition: 0.2s;
+    }
+
+    .address-actions .btn-copy:hover {
+      background: #3b3b4f;
+    }
+
+    .address-actions .btn-copy:active {
+      transform: scale(0.96);
+    }
+
+    /* Предупреждения */
+    .warnings {
+      text-align: left;
+      margin-top: 1.2rem;
+      padding: 1rem 1.2rem;
+      background: #fff8f0;
+      border-radius: 20px;
+      border-left: 4px solid #f7931a;
+    }
+
+    .warnings-title {
+      font-weight: 700;
+      font-size: 0.9rem;
+      color: #1e1e2a;
+      margin-bottom: 0.6rem;
+    }
+
+    .warnings ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .warnings ul li {
+      font-size: 0.85rem;
+      color: #5a5a6a;
+      padding: 0.3rem 0;
+      padding-left: 1.5rem;
+      position: relative;
+      line-height: 1.4;
+    }
+
+    .warnings ul li::before {
+      content: "⚠️";
+      position: absolute;
+      left: 0;
+      font-size: 0.8rem;
     }
 
     .footer {
@@ -183,6 +478,23 @@
         width: 100%;
         justify-content: center;
       }
+      .modal-content {
+        padding: 1.8rem;
+      }
+      .address-text {
+        font-size: 0.7rem;
+        padding: 0.6rem;
+      }
+      .crypto-tab {
+        font-size: 0.8rem;
+        padding: 0.5rem 0.8rem;
+      }
+      .project-description {
+        padding: 1.5rem;
+      }
+      .project-description h2 {
+        font-size: 1.2rem;
+      }
     }
   </style>
 </head>
@@ -194,12 +506,34 @@
       <h1>🐈 Отправь кота <span>+</span></h1>
     </div>
     <div class="header-actions">
+      <button class="btn btn-donate" id="donateBtn">
+        <svg width="20" height="20" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="16" cy="16" r="16" fill="#F7931A"/>
+          <path d="M23.189 14.02c.314-1.096-.067-1.964-1.193-2.426l.244-.992-1.004-.253-.238.965c-.264-.067-.535-.13-.805-.192l.24-.974-1.003-.253-.244.99c-.218-.05-.433-.1-.643-.154l.006-.026-1.384-.348-.159.646s.745.174.73.184c.407.104.48.377.468.594l-.47 1.91c.028.007.065.018.105.034l-.106-.027-.659 2.677c-.05.125-.176.312-.462.241.01.015-.73-.184-.73-.184l-.5 1.164 1.306.33c.243.062.481.126.716.185l-.245.993 1.003.253.244-.99c.274.075.54.145.8.21l-.243.986 1.004.254.245-.995c1.713.329 3.001.197 3.544-1.374.437-1.266-.022-1.995-.922-2.47.656-.153 1.15-.59 1.282-1.493zm-2.293 3.256c-.31 1.263-2.413.58-3.095.409l.553-2.244c.682.172 2.87.512 2.542 1.835zm.31-3.284c-.283 1.146-2.03.564-2.597.421l.5-2.03c.567.143 2.395.41 2.097 1.609z" fill="white"/>
+        </svg>
+        Поддержать
+      </button>
       <a href="https://t.me/otpravkotabot" target="_blank" class="btn btn-primary">В бота @otpravkotabot</a>
     </div>
   </header>
 
   <!-- ГАЛЕРЕЯ -->
   <div class="gallery-grid" id="galleryGrid"></div>
+
+  <!-- ОПИСАНИЕ ПРОЕКТА -->
+  <div class="project-description">
+    <h2>📖 О проекте</h2>
+    <p>
+      <strong>«Отправь кота»</strong> — это галерея лучших котов со всего интернета. 
+      Здесь ты можешь наслаждаться прекрасными фотографиями пушистых друзей, 
+      а также <span class="highlight">поддержать проект</span>, чтобы мы могли радовать тебя 
+      новыми котами каждый день! 🐱
+    </p>
+    <p style="margin-top: 0.8rem;">
+      Все коты добавляются с любовью ❤️. Если хочешь увидеть своего кота в галерее — 
+      напиши нам в <a href="https://t.me/otpravkotabot" target="_blank">@otpravkotabot</a>!
+    </p>
+  </div>
 
   <!-- КНОПКА ОТПРАВКИ В БОТА -->
   <div class="send-area">
@@ -212,17 +546,94 @@
   </div>
 </div>
 
+<!-- МОДАЛЬНОЕ ОКНО ПОДДЕРЖКИ -->
+<div class="modal" id="donateModal">
+  <div class="modal-content">
+    <button class="modal-close" id="closeModalBtn">×</button>
+    
+    <div class="modal-icon">💝</div>
+    <h2>Кошёлек</h2>
+    <p class="subtitle">Выбери валюту для поддержки</p>
+
+    <!-- Крипто-валюты -->
+    <div class="crypto-tabs">
+      <button class="crypto-tab btc active" data-crypto="btc">₿ Bitcoin</button>
+      <button class="crypto-tab ton" data-crypto="ton">⧫ TON</button>
+      <button class="crypto-tab pepe" data-crypto="pepe">🐸 Pepe</button>
+    </div>
+
+    <!-- Блок с адресом -->
+    <div class="address-block btc-active" id="addressBlock">
+      <div class="address-label">
+        <span class="crypto-icon" id="cryptoIcon">₿</span>
+        <span id="cryptoName">Bitcoin</span>
+        <span class="network" id="cryptoNetwork">(сеть Bitcoin)</span>
+      </div>
+
+      <div class="address-text" id="btcAddress">bc1q7cuskwm87jhmj5z8c4qthankn5nm9qnnql3fnj</div>
+
+      <div class="address-actions">
+        <button class="btn-copy" id="copyBtn">📋 Копировать адрес</button>
+      </div>
+    </div>
+
+    <!-- ПРЕДУПРЕЖДЕНИЯ -->
+    <div class="warnings">
+      <div class="warnings-title">📌 Важно знать</div>
+      <ul>
+        <li>Переводы с санкционных бирж запрещены — средства могут быть заморожены.</li>
+        <li>Отправка NFT приведёт к их потере.</li>
+        <li>Всегда проверяйте полный адрес перед отправкой. Мы не сможем вернуть средства, отправленные на неправильный адрес.</li>
+      </ul>
+    </div>
+
+    <p style="margin-top: 1rem; font-size: 0.8rem; color: #999;" id="networkHint">
+      ⚠️ Отправляйте только BTC в сети Bitcoin
+    </p>
+  </div>
+</div>
+
 <script>
   // ============================================================
   //  ДОБАВЛЯЙ КОТОВ ОДНОЙ СТРОЧКОЙ В МАССИВЕ НИЖЕ:
   //  { name: 'Имя кота', img: 'https://ссылка.на/фото.jpg' }
   // ============================================================
   const cats = [
-       { name: 'siGMA aura kit', img: 'https://avatars.mds.yandex.net/i?id=cdcf50461c89c6038a73f7f83e46cbdc_l-11374185-images-thumbs&n=33&w=664&h=720' },
+    { name: 'siGMA aura kit', img: 'https://avatars.mds.yandex.net/i?id=cdcf50461c89c6038a73f7f83e46cbdc_l-11374185-images-thumbs&n=33&w=664&h=720' },
     // 👇 ДОБАВЛЯЙ НОВЫХ КОТОВ СЮДА (ОДНОЙ СТРОЧКОЙ)
     // { name: 'Барсик', img: 'https://example.com/barsik.jpg' },
   ];
   // ============================================================
+
+  // Данные для криптовалют
+  const cryptoData = {
+    btc: {
+      name: 'Bitcoin',
+      icon: '₿',
+      network: 'сеть Bitcoin',
+      address: 'bc1q7cuskwm87jhmj5z8c4qthankn5nm9qnnql3fnj',
+      hint: '⚠️ Отправляйте только BTC в сети Bitcoin',
+      class: 'btc-active'
+    },
+    ton: {
+      name: 'TON',
+      icon: '⧫',
+      network: 'сеть TON',
+      address: 'UQDnNEsPuYA6Bb5xdsr8UWTQeHtmw0iTZKNaCwhGfRqg4lar',
+      hint: '⚠️ Отправляйте только TON в сети TON',
+      class: 'ton-active'
+    },
+    pepe: {
+      name: 'Pepe',
+      icon: '🐸',
+      network: 'сеть Ethereum (ERC-20)',
+      address: '0xe27b392F37af422B4B8Ed92FeDd9Cb7435A3B973',
+      hint: '⚠️ Отправляйте только Pepe (PEPE) в сети Ethereum',
+      class: 'pepe-active'
+    }
+  };
+
+  let currentCrypto = 'btc';
 
   const galleryGrid = document.getElementById('galleryGrid');
 
@@ -240,6 +651,86 @@
   }
 
   renderGallery();
+
+  // ---- МОДАЛЬНОЕ ОКНО ПОДДЕРЖКИ ----
+  const modal = document.getElementById('donateModal');
+  const donateBtn = document.getElementById('donateBtn');
+  const closeBtn = document.getElementById('closeModalBtn');
+  const copyBtn = document.getElementById('copyBtn');
+  const addressText = document.getElementById('btcAddress');
+  const addressBlock = document.getElementById('addressBlock');
+  const cryptoName = document.getElementById('cryptoName');
+  const cryptoNetwork = document.getElementById('cryptoNetwork');
+  const cryptoIcon = document.getElementById('cryptoIcon');
+  const networkHint = document.getElementById('networkHint');
+  const cryptoTabs = document.querySelectorAll('.crypto-tab');
+
+  // Переключение валюты
+  function switchCrypto(cryptoKey) {
+    currentCrypto = cryptoKey;
+    const data = cryptoData[cryptoKey];
+
+    // Обновляем табы
+    cryptoTabs.forEach(tab => {
+      tab.classList.remove('active');
+      if (tab.dataset.crypto === cryptoKey) {
+        tab.classList.add('active');
+      }
+    });
+
+    // Обновляем адрес
+    addressText.textContent = data.address;
+    cryptoName.textContent = data.name;
+    cryptoIcon.textContent = data.icon;
+    cryptoNetwork.textContent = `(${data.network})`;
+    networkHint.textContent = data.hint;
+
+    // Обновляем цвет рамки
+    addressBlock.className = 'address-block ' + data.class;
+  }
+
+  // Обработчики табов
+  cryptoTabs.forEach(tab => {
+    tab.addEventListener('click', function() {
+      const cryptoKey = this.dataset.crypto;
+      switchCrypto(cryptoKey);
+    });
+  });
+
+  // Открыть
+  donateBtn.addEventListener('click', () => {
+    modal.classList.add('show');
+    document.body.style.overflow = 'hidden';
+  });
+
+  // Закрыть
+  function closeModal() {
+    modal.classList.remove('show');
+    document.body.style.overflow = 'auto';
+  }
+
+  closeBtn.addEventListener('click', closeModal);
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal) closeModal();
+  });
+
+  // Копировать адрес
+  copyBtn.addEventListener('click', async () => {
+    try {
+      await navigator.clipboard.writeText(addressText.textContent.trim());
+      copyBtn.textContent = '✅ Скопировано!';
+      setTimeout(() => {
+        copyBtn.textContent = '📋 Копировать адрес';
+      }, 2500);
+    } catch (err) {
+      alert('Не удалось скопировать. Адрес: ' + addressText.textContent);
+    }
+  });
+
+  // Закрыть по ESC
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeModal();
+  });
 </script>
 </body>
-</html>
+  </html>
