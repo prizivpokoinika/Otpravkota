@@ -87,8 +87,15 @@
       transform: scale(1.02);
     }
 
-    .btn-primary::before {
-      content: "📤 ";
+    .btn-meow {
+      background: #ff6b6b;
+      color: white;
+      border: 2px solid #ff6b6b;
+    }
+
+    .btn-meow:hover {
+      background: #e55a5a;
+      transform: scale(1.02);
     }
 
     .btn-donate {
@@ -517,6 +524,149 @@
       font-size: 0.8rem;
     }
 
+    /* Модальное окно отправки кота */
+    .send-modal .form-group {
+      margin-bottom: 1.2rem;
+      text-align: left;
+    }
+
+    .send-modal .form-group label {
+      display: block;
+      font-weight: 600;
+      color: #1e1e2a;
+      margin-bottom: 0.3rem;
+      font-size: 0.9rem;
+    }
+
+    .send-modal .form-group input {
+      width: 100%;
+      padding: 0.7rem 1rem;
+      border-radius: 16px;
+      border: 2px solid #ddd8d0;
+      font-size: 0.95rem;
+      background: #fcfaf8;
+      transition: 0.2s;
+      font-family: inherit;
+    }
+
+    .send-modal .form-group input:focus {
+      outline: none;
+      border-color: #1e1e2a;
+      background: white;
+    }
+
+    .send-modal .file-upload-area {
+      border: 2px dashed #ddd8d0;
+      border-radius: 16px;
+      padding: 1.5rem;
+      text-align: center;
+      cursor: pointer;
+      transition: 0.3s;
+      background: #fcfaf8;
+      position: relative;
+    }
+
+    .send-modal .file-upload-area:hover {
+      border-color: #1e1e2a;
+      background: #f0ede8;
+    }
+
+    .send-modal .file-upload-area input[type="file"] {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      cursor: pointer;
+    }
+
+    .send-modal .file-upload-area .file-icon {
+      font-size: 2rem;
+      display: block;
+      margin-bottom: 0.3rem;
+    }
+
+    .send-modal .file-upload-area .file-text {
+      color: #6a6a7a;
+      font-size: 0.85rem;
+    }
+
+    .send-modal .file-upload-area .file-name {
+      font-weight: 600;
+      color: #1e1e2a;
+      margin-top: 0.3rem;
+      font-size: 0.9rem;
+    }
+
+    .send-modal .file-preview {
+      margin-top: 0.8rem;
+      text-align: center;
+      display: none;
+    }
+
+    .send-modal .file-preview.show {
+      display: block;
+    }
+
+    .send-modal .file-preview img {
+      max-width: 100%;
+      max-height: 200px;
+      border-radius: 12px;
+      border: 2px solid #ddd8d0;
+    }
+
+    .send-modal .btn-send {
+      background: #1e1e2a;
+      color: white;
+      border: none;
+      padding: 0.8rem 2rem;
+      border-radius: 40px;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: 0.2s;
+      width: 100%;
+    }
+
+    .send-modal .btn-send:hover {
+      background: #3b3b4f;
+      transform: scale(1.02);
+    }
+
+    .send-modal .btn-send:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .send-modal .status-msg {
+      margin-top: 0.8rem;
+      padding: 0.6rem 1rem;
+      border-radius: 12px;
+      font-size: 0.9rem;
+      display: none;
+    }
+
+    .send-modal .status-msg.show {
+      display: block;
+    }
+
+    .send-modal .status-msg.success {
+      background: #d4edda;
+      color: #155724;
+    }
+
+    .send-modal .status-msg.error {
+      background: #f8d7da;
+      color: #721c24;
+    }
+
+    .send-modal .status-msg.loading {
+      background: #fff3cd;
+      color: #856404;
+    }
+
     .footer {
       margin-top: 2rem;
       text-align: center;
@@ -586,6 +736,7 @@
       <h1>🐈 Отправь кота <span>+</span></h1>
     </div>
     <div class="header-actions">
+      <button class="btn btn-meow" id="meowBtn">meow</button>
       <button class="btn btn-donate" id="donateBtn">
         <svg width="20" height="20" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
           <circle cx="16" cy="16" r="16" fill="#F7931A"/>
@@ -599,7 +750,6 @@
         </svg>
         Канал
       </a>
-      <a href="https://t.me/otpravkotabot" target="_blank" class="btn btn-primary">В бота</a>
     </div>
   </header>
 
@@ -621,10 +771,10 @@
     </p>
   </div>
 
-  <!-- КНОПКА ОТПРАВКИ В БОТА -->
+  <!-- КНОПКА ОТПРАВКИ КОТА -->
   <div class="send-area">
-    <a href="https://t.me/otpravkotabot" target="_blank" class="btn">Отправить кота в бота</a>
-    <p style="margin-top: 0.7rem; color: #6a6a7a; font-size: 0.9rem;">нажми — перейдёшь в @otpravkotabot</p>
+    <button class="btn" id="sendCatBtn">📤 Отправить кота</button>
+    <p style="margin-top: 0.7rem; color: #6a6a7a; font-size: 0.9rem;">загрузи фото и имя кота прямо сейчас :)</p>
   </div>
 
   <div class="footer">
@@ -676,7 +826,56 @@
   </div>
 </div>
 
+<!-- МОДАЛЬНОЕ ОКНО ОТПРАВКИ КОТА -->
+<div class="modal send-modal" id="sendModal">
+  <div class="modal-content">
+    <button class="modal-close" id="closeSendModalBtn" aria-label="Закрыть">✕</button>
+    
+    <div class="modal-icon">🐱</div>
+    <h2>Отправить кота</h2>
+    <p class="subtitle">Загрузи фото и имя кота</p>
+
+    <div class="form-group">
+      <label for="sendCatName">Имя кота</label>
+      <input type="text" id="sendCatName" placeholder="Например: Барсик">
+    </div>
+
+    <div class="form-group">
+      <label>Фото кота</label>
+      <div class="file-upload-area" id="fileUploadArea">
+        <span class="file-icon">🖼️</span>
+        <span class="file-text">Нажми чтобы выбрать фото</span>
+        <div class="file-name" id="fileName"></div>
+        <input type="file" id="sendCatImage" accept="image/*">
+      </div>
+      <div class="file-preview" id="filePreview">
+        <img id="previewImage" alt="Превью">
+      </div>
+    </div>
+
+    <button class="btn-send" id="sendCatToBotBtn">📤 Отправить</button>
+    <div class="status-msg" id="sendStatus"></div>
+  </div>
+</div>
+
+<audio id="meowAudio" preload="auto">
+  <source src="mp3.mp3" type="audio/mpeg">
+</audio>
+
 <script>
+  // ============================================================
+  //  ТОКЕН БОТА
+  //  Бот: @otpravkotabot
+  // ============================================================
+  const BOT_TOKEN = '8996068105:AAHj5Zag9wWzKGGPqZxpy8gKX8UR0LdmoSI';
+  const CHAT_ID = '8590718223';
+  // ============================================================
+
+  let currentCrypto = 'btc';
+  let selectedFile = null;
+
+  const galleryGrid = document.getElementById('galleryGrid');
+
   // ============================================================
   //  ДОБАВЛЯЙ КОТОВ ОДНОЙ СТРОЧКОЙ В МАССИВЕ НИЖЕ:
   //  { name: 'Имя кота', img: 'https://ссылка.на/фото.jpg' }
@@ -685,13 +884,12 @@
     { name: 'siGMA aura kit', img: 'https://avatars.mds.yandex.net/i?id=cdcf50461c89c6038a73f7f83e46cbdc_l-11374185-images-thumbs&n=33&w=664&h=720' },
     { name: 'HUH', img: 'https://i.ibb.co/60TYCr3m/eac9978d7a59d80b64b6c78a9012426a.jpg' },
     { name: 'Это ваще не кот', img: 'https://i127.fastpic.org/big/2026/0709/e9/590194a8ed05bc744e92e99431fea5e9.webp?md5=a-uJqmPUEDw7WTfwzpw7OA&expires=1783627200' },
-{ name: 'Австралийский художник', img: 'https://static.wikia.nocookie.net/bbeab035-f7f3-49d5-88a6-d2a497e058ac/scale-to-width/755' },
-{ name: 'Кit ругается на немецком', img: 'https://i.ibb.co/3Y092Kg7/maxresdefault-2.jpg' },
-{ name: 'Кit в кiфiрэ', img: 'https://i.ibb.co/jkyPthfq/4a4b9069584ef25c68839cfe23548ba3.jpg' },
+    { name: 'Австралийский художник', img: 'https://static.wikia.nocookie.net/bbeab035-f7f3-49d5-88a6-d2a497e058ac/scale-to-width/755' },
+    { name: 'Кit ругается на немецком', img: 'https://i.ibb.co/3Y092Kg7/maxresdefault-2.jpg' },
+    { name: 'Кit в кiфiрэ', img: 'https://i.ibb.co/jkyPthfq/4a4b9069584ef25c68839cfe23548ba3.jpg' }
   ];
   // ============================================================
 
-  // Данные для криптовалют
   const cryptoData = {
     btc: {
       name: 'Bitcoin',
@@ -719,10 +917,6 @@
     }
   };
 
-  let currentCrypto = 'btc';
-
-  const galleryGrid = document.getElementById('galleryGrid');
-
   function renderGallery() {
     galleryGrid.innerHTML = '';
     cats.forEach(cat => {
@@ -737,6 +931,17 @@
   }
 
   renderGallery();
+
+  // ---- MEOW КНОПКА ----
+  const meowBtn = document.getElementById('meowBtn');
+  const meowAudio = document.getElementById('meowAudio');
+
+  meowBtn.addEventListener('click', () => {
+    meowAudio.currentTime = 0;
+    meowAudio.play().catch(err => {
+      console.log('Audio play error:', err);
+    });
+  });
 
   // ---- МОДАЛЬНОЕ ОКНО ПОДДЕРЖКИ ----
   const modal = document.getElementById('donateModal');
@@ -807,6 +1012,129 @@
       }, 2500);
     } catch (err) {
       alert('Не удалось скопировать. Адрес: ' + addressText.textContent);
+    }
+  });
+
+  // ---- МОДАЛЬНОЕ ОКНО ОТПРАВКИ КОТА ----
+  const sendModal = document.getElementById('sendModal');
+  const sendCatBtn = document.getElementById('sendCatBtn');
+  const closeSendModalBtn = document.getElementById('closeSendModalBtn');
+  const sendCatName = document.getElementById('sendCatName');
+  const sendCatImage = document.getElementById('sendCatImage');
+  const fileUploadArea = document.getElementById('fileUploadArea');
+  const fileName = document.getElementById('fileName');
+  const filePreview = document.getElementById('filePreview');
+  const previewImage = document.getElementById('previewImage');
+  const sendCatToBotBtn = document.getElementById('sendCatToBotBtn');
+  const sendStatus = document.getElementById('sendStatus');
+
+  sendCatBtn.addEventListener('click', () => {
+    sendModal.classList.add('show');
+    document.body.style.overflow = 'hidden';
+    sendStatus.className = 'status-msg';
+    sendStatus.textContent = '';
+    selectedFile = null;
+    filePreview.classList.remove('show');
+    fileName.textContent = '';
+    sendCatName.value = '';
+    sendCatImage.value = '';
+  });
+
+  function closeSendModal() {
+    sendModal.classList.remove('show');
+    document.body.style.overflow = 'auto';
+  }
+
+  closeSendModalBtn.addEventListener('click', closeSendModal);
+  sendModal.addEventListener('click', (e) => {
+    if (e.target === sendModal) closeSendModal();
+  });
+
+  sendCatImage.addEventListener('change', function(e) {
+    if (this.files && this.files[0]) {
+      const file = this.files[0];
+      if (!file.type.startsWith('image/')) {
+        showSendStatus('Пожалуйста, выбери изображение', 'error');
+        this.value = '';
+        return;
+      }
+      if (file.size > 10 * 1024 * 1024) {
+        showSendStatus('Файл слишком большой! Максимум 10 МБ', 'error');
+        this.value = '';
+        return;
+      }
+      
+      selectedFile = file;
+      fileName.textContent = '📎 ' + file.name;
+      
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        previewImage.src = e.target.result;
+        filePreview.classList.add('show');
+      };
+      reader.readAsDataURL(file);
+      showSendStatus('', '');
+    }
+  });
+
+  async function sendCatToBot() {
+    const name = sendCatName.value.trim();
+    
+    if (!name) {
+      showSendStatus('Введите имя кота', 'error');
+      return;
+    }
+
+    if (!selectedFile) {
+      showSendStatus('Выберите фото кота', 'error');
+      return;
+    }
+
+    sendCatToBotBtn.disabled = true;
+    sendCatToBotBtn.textContent = '⏳ Отправка...';
+    showSendStatus('Отправляем кота в модерацию...', 'loading');
+
+    try {
+      const formData = new FormData();
+      formData.append('chat_id', CHAT_ID);
+      formData.append('photo', selectedFile);
+      formData.append('caption', `Имя: ${name}`);
+
+      const photoResponse = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendPhoto`, {
+        method: 'POST',
+        body: formData
+      });
+
+      const photoData = await photoResponse.json();
+
+      if (photoData.ok) {
+        showSendStatus('Кот успешно отправлен в модерацию!', 'success');
+        sendCatName.value = '';
+        selectedFile = null;
+        filePreview.classList.remove('show');
+        fileName.textContent = '';
+        sendCatImage.value = '';
+      } else {
+        showSendStatus('Ошибка: ' + (photoData.description || 'Неизвестная ошибка'), 'error');
+      }
+    } catch (error) {
+      showSendStatus('Ошибка: ' + error.message, 'error');
+    } finally {
+      sendCatToBotBtn.disabled = false;
+      sendCatToBotBtn.textContent = '📤 Отправить';
+    }
+  }
+
+  function showSendStatus(text, type) {
+    sendStatus.textContent = text;
+    sendStatus.className = 'status-msg show ' + type;
+  }
+
+  sendCatToBotBtn.addEventListener('click', sendCatToBot);
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && sendModal.classList.contains('show')) {
+      closeSendModal();
     }
   });
 </script>
