@@ -45,14 +45,6 @@
       color: #1e1e2a;
     }
 
-    .logo span {
-      background: #f9d56e;
-      padding: 0.1rem 0.6rem;
-      border-radius: 40px;
-      font-size: 1.5rem;
-      margin-left: 6px;
-    }
-
     .header-actions {
       display: flex;
       gap: 1rem;
@@ -124,6 +116,17 @@
       fill: white;
       width: 20px;
       height: 20px;
+    }
+
+    .btn-send-header {
+      background: #28a745;
+      color: white;
+      border: 2px solid #28a745;
+    }
+
+    .btn-send-header:hover {
+      background: #218838;
+      transform: scale(1.02);
     }
 
     .gallery-grid {
@@ -235,37 +238,21 @@
       text-decoration: underline;
     }
 
-    .tg-link {
+    .footer {
+      margin-top: 2rem;
       text-align: center;
-      margin: 1.5rem 0 0.5rem;
-      padding: 1rem;
-      background: #e8f0fe;
-      border-radius: 40px;
-      border: 2px solid #0088cc;
-      transition: 0.2s;
+      color: #8a8a9a;
+      font-size: 0.9rem;
     }
 
-    .tg-link:hover {
-      background: #d4e4fc;
-      transform: scale(1.01);
-    }
-
-    .tg-link a {
-      color: #0088cc;
-      font-weight: 600;
-      font-size: 1.1rem;
+    .footer a {
+      color: #1e1e2a;
+      font-weight: 500;
       text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 12px;
     }
 
-    .tg-link a:hover {
+    .footer a:hover {
       text-decoration: underline;
-    }
-
-    .tg-link .tg-icon {
-      font-size: 1.8rem;
     }
 
     .modal {
@@ -524,7 +511,6 @@
       font-size: 0.8rem;
     }
 
-    /* Модальное окно отправки кота */
     .send-modal .form-group {
       margin-bottom: 1.2rem;
       text-align: left;
@@ -571,16 +557,6 @@
       background: #f0ede8;
     }
 
-    .send-modal .file-upload-area input[type="file"] {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      opacity: 0;
-      cursor: pointer;
-    }
-
     .send-modal .file-upload-area .file-icon {
       font-size: 2rem;
       display: block;
@@ -597,6 +573,16 @@
       color: #1e1e2a;
       margin-top: 0.3rem;
       font-size: 0.9rem;
+    }
+
+    .send-modal .file-upload-area input[type="file"] {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      cursor: pointer;
     }
 
     .send-modal .file-preview {
@@ -667,6 +653,38 @@
       color: #856404;
     }
 
+    .photo-source-buttons {
+      display: flex;
+      gap: 0.8rem;
+      margin-bottom: 0.8rem;
+      flex-wrap: wrap;
+    }
+
+    .photo-source-buttons .btn-source {
+      flex: 1;
+      padding: 0.5rem 1rem;
+      border-radius: 30px;
+      border: 2px solid #ddd8d0;
+      background: white;
+      font-weight: 600;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: 0.2s;
+      text-align: center;
+      min-width: 80px;
+    }
+
+    .photo-source-buttons .btn-source:hover {
+      border-color: #1e1e2a;
+      background: #f0ede8;
+    }
+
+    .photo-source-buttons .btn-source.active {
+      border-color: #1e1e2a;
+      background: #1e1e2a;
+      color: white;
+    }
+
     .footer {
       margin-top: 2rem;
       text-align: center;
@@ -725,6 +743,14 @@
         width: 38px;
         height: 38px;
       }
+      .photo-source-buttons .btn-source {
+        font-size: 0.8rem;
+        padding: 0.4rem 0.6rem;
+      }
+      .header-actions .btn {
+        font-size: 0.85rem;
+        padding: 0.5rem 1rem;
+      }
     }
   </style>
 </head>
@@ -733,9 +759,10 @@
 
   <header class="header">
     <div class="logo">
-      <h1>🐈 Отправь кота <span>+</span></h1>
+      <h1>🐈 Отправь кота</h1>
     </div>
     <div class="header-actions">
+      <button class="btn btn-send-header" id="sendCatBtnHeader">📤 Отправить кота</button>
       <button class="btn btn-meow" id="meowBtn">meow</button>
       <button class="btn btn-donate" id="donateBtn">
         <svg width="20" height="20" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -753,10 +780,8 @@
     </div>
   </header>
 
-  <!-- ГАЛЕРЕЯ -->
   <div class="gallery-grid" id="galleryGrid"></div>
 
-  <!-- ОПИСАНИЕ ПРОЕКТА -->
   <div class="project-description">
     <h2>📖 О проекте</h2>
     <p>
@@ -767,14 +792,13 @@
     </p>
     <p style="margin-top: 0.8rem;">
       Все коты добавляются с любовью ❤️. Если хочешь увидеть своего кота в галерее — 
-      напиши нам в <a href="https://t.me/otpravkotabot" target="_blank">@otpravkotabot</a>!
+      нажмите на кнопку ниже <a href="-_-" target="_blank">просим отпрвлять с впн ведь в рф заблокировали telegram</a>!
     </p>
   </div>
 
-  <!-- КНОПКА ОТПРАВКИ КОТА -->
   <div class="send-area">
     <button class="btn" id="sendCatBtn">📤 Отправить кота</button>
-    <p style="margin-top: 0.7rem; color: #6a6a7a; font-size: 0.9rem;">загрузи фото и имя кота прямо сейчас :)</p>
+    <p style="margin-top: 0.7rem; color: #6a6a7a; font-size: 0.9rem;">загрузи фото и имя кота прямо сейчас (просим с впн ведь telegram api заблокировали</p>
   </div>
 
   <div class="footer">
@@ -782,7 +806,6 @@
   </div>
 </div>
 
-<!-- МОДАЛЬНОЕ ОКНО ПОДДЕРЖКИ -->
 <div class="modal" id="donateModal">
   <div class="modal-content">
     <button class="modal-close" id="closeModalBtn" aria-label="Закрыть">✕</button>
@@ -826,7 +849,6 @@
   </div>
 </div>
 
-<!-- МОДАЛЬНОЕ ОКНО ОТПРАВКИ КОТА -->
 <div class="modal send-modal" id="sendModal">
   <div class="modal-content">
     <button class="modal-close" id="closeSendModalBtn" aria-label="Закрыть">✕</button>
@@ -842,9 +864,15 @@
 
     <div class="form-group">
       <label>Фото кота</label>
+      
+      <div class="photo-source-buttons">
+        <button class="btn-source active" id="galleryBtn" data-source="gallery">🖼️ Галерея</button>
+        <button class="btn-source" id="cameraBtn" data-source="camera">📷 Камера</button>
+      </div>
+
       <div class="file-upload-area" id="fileUploadArea">
         <span class="file-icon">🖼️</span>
-        <span class="file-text">Нажми чтобы выбрать фото</span>
+        <span class="file-text" id="fileUploadText">Нажми чтобы выбрать фото</span>
         <div class="file-name" id="fileName"></div>
         <input type="file" id="sendCatImage" accept="image/*">
       </div>
@@ -863,16 +891,12 @@
 </audio>
 
 <script>
-  // ============================================================
-  //  ТОКЕН БОТА
-  //  Бот: @otpravkotabot
-  // ============================================================
   const BOT_TOKEN = '8996068105:AAHj5Zag9wWzKGGPqZxpy8gKX8UR0LdmoSI';
   const CHAT_ID = '8590718223';
-  // ============================================================
 
   let currentCrypto = 'btc';
   let selectedFile = null;
+  let currentSource = 'gallery';
 
   const galleryGrid = document.getElementById('galleryGrid');
 
@@ -932,18 +956,14 @@
 
   renderGallery();
 
-  // ---- MEOW КНОПКА ----
   const meowBtn = document.getElementById('meowBtn');
   const meowAudio = document.getElementById('meowAudio');
 
   meowBtn.addEventListener('click', () => {
     meowAudio.currentTime = 0;
-    meowAudio.play().catch(err => {
-      console.log('Audio play error:', err);
-    });
+    meowAudio.play().catch(err => {});
   });
 
-  // ---- МОДАЛЬНОЕ ОКНО ПОДДЕРЖКИ ----
   const modal = document.getElementById('donateModal');
   const donateBtn = document.getElementById('donateBtn');
   const closeBtn = document.getElementById('closeModalBtn');
@@ -1015,20 +1035,23 @@
     }
   });
 
-  // ---- МОДАЛЬНОЕ ОКНО ОТПРАВКИ КОТА ----
   const sendModal = document.getElementById('sendModal');
   const sendCatBtn = document.getElementById('sendCatBtn');
+  const sendCatBtnHeader = document.getElementById('sendCatBtnHeader');
   const closeSendModalBtn = document.getElementById('closeSendModalBtn');
   const sendCatName = document.getElementById('sendCatName');
   const sendCatImage = document.getElementById('sendCatImage');
   const fileUploadArea = document.getElementById('fileUploadArea');
+  const fileUploadText = document.getElementById('fileUploadText');
   const fileName = document.getElementById('fileName');
   const filePreview = document.getElementById('filePreview');
   const previewImage = document.getElementById('previewImage');
   const sendCatToBotBtn = document.getElementById('sendCatToBotBtn');
   const sendStatus = document.getElementById('sendStatus');
+  const galleryBtn = document.getElementById('galleryBtn');
+  const cameraBtn = document.getElementById('cameraBtn');
 
-  sendCatBtn.addEventListener('click', () => {
+  function openSendModal() {
     sendModal.classList.add('show');
     document.body.style.overflow = 'hidden';
     sendStatus.className = 'status-msg';
@@ -1037,6 +1060,35 @@
     filePreview.classList.remove('show');
     fileName.textContent = '';
     sendCatName.value = '';
+    sendCatImage.value = '';
+  }
+
+  sendCatBtn.addEventListener('click', openSendModal);
+  sendCatBtnHeader.addEventListener('click', openSendModal);
+
+  galleryBtn.addEventListener('click', function() {
+    currentSource = 'gallery';
+    galleryBtn.classList.add('active');
+    cameraBtn.classList.remove('active');
+    sendCatImage.setAttribute('accept', 'image/*');
+    sendCatImage.removeAttribute('capture');
+    fileUploadText.textContent = 'Нажми чтобы выбрать фото из галереи';
+    selectedFile = null;
+    filePreview.classList.remove('show');
+    fileName.textContent = '';
+    sendCatImage.value = '';
+  });
+
+  cameraBtn.addEventListener('click', function() {
+    currentSource = 'camera';
+    cameraBtn.classList.add('active');
+    galleryBtn.classList.remove('active');
+    sendCatImage.setAttribute('accept', 'image/*');
+    sendCatImage.setAttribute('capture', 'environment');
+    fileUploadText.textContent = 'Нажми чтобы сделать фото';
+    selectedFile = null;
+    filePreview.classList.remove('show');
+    fileName.textContent = '';
     sendCatImage.value = '';
   });
 
@@ -1092,7 +1144,7 @@
 
     sendCatToBotBtn.disabled = true;
     sendCatToBotBtn.textContent = '⏳ Отправка...';
-    showSendStatus('Отправляем кота в модерацию...', 'loading');
+    showSendStatus('Отправляем кота...', 'loading');
 
     try {
       const formData = new FormData();
@@ -1118,7 +1170,7 @@
         showSendStatus('Ошибка: ' + (photoData.description || 'Неизвестная ошибка'), 'error');
       }
     } catch (error) {
-      showSendStatus('Ошибка: ' + error.message, 'error');
+      showSendStatus('❌ Не удалось отправить через Telegram API (возможно блокировка). Попробуйте с VPN', 'error');
     } finally {
       sendCatToBotBtn.disabled = false;
       sendCatToBotBtn.textContent = '📤 Отправить';
