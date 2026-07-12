@@ -41,7 +41,6 @@
     .logo h1 {
       font-size: 2rem;
       font-weight: 700;
-      letter-spacing: -0.5px;
       color: #1e1e2a;
     }
 
@@ -126,6 +125,19 @@
 
     .btn-send-header:hover {
       background: #218838;
+      transform: scale(1.02);
+    }
+
+    .btn-download {
+      background: #6f42c1;
+      color: white;
+      border: 2px solid #6f42c1;
+      font-size: 1.1rem;
+      padding: 0.8rem 2.5rem;
+    }
+
+    .btn-download:hover {
+      background: #5a32a3;
       transform: scale(1.02);
     }
 
@@ -236,6 +248,28 @@
 
     .project-description a:hover {
       text-decoration: underline;
+    }
+
+    .download-section {
+      text-align: center;
+      margin: 2rem 0 1.5rem;
+      padding: 2rem;
+      background: white;
+      border-radius: 32px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.04);
+      border: 2px dashed #6f42c1;
+    }
+
+    .download-section h3 {
+      font-size: 1.3rem;
+      color: #1e1e2a;
+      margin-bottom: 0.5rem;
+    }
+
+    .download-section p {
+      color: #6a6a7a;
+      margin-bottom: 1rem;
+      font-size: 0.95rem;
     }
 
     .footer {
@@ -751,6 +785,15 @@
         font-size: 0.85rem;
         padding: 0.5rem 1rem;
       }
+      .download-section {
+        padding: 1.5rem;
+      }
+      .btn-download {
+        font-size: 1rem;
+        padding: 0.7rem 1.8rem;
+        width: 100%;
+        justify-content: center;
+      }
     }
   </style>
 </head>
@@ -791,14 +834,19 @@
       новыми котами каждый день! 🐱
     </p>
     <p style="margin-top: 0.8rem;">
-      Все коты добавляются с любовью ❤️. Если хочешь увидеть своего кота в галерее — 
-      нажмите на кнопку ниже <a href="-_-" target="_blank">просим отпрвлять с впн ведь в рф заблокировали telegram</a>!
+      Все коты добавляются с любовью ❤️. Отправь своего кота через кнопку ниже!
     </p>
   </div>
 
   <div class="send-area">
     <button class="btn" id="sendCatBtn">📤 Отправить кота</button>
-    <p style="margin-top: 0.7rem; color: #6a6a7a; font-size: 0.9rem;">загрузи фото и имя кота прямо сейчас (просим с впн ведь telegram api заблокировали</p>
+    <p style="margin-top: 0.7rem; color: #6a6a7a; font-size: 0.9rem;">загрузи фото и имя кота прямо сейчас</p>
+  </div>
+
+  <div class="download-section">
+    <h3>📱 Скачать приложение</h3>
+    <p>Установи официальное приложение «Отправь кота» на свой телефон</p>
+    <a href="отправь котика.apk" download class="btn btn-download">⬇️ Скачать APK</a>
   </div>
 
   <div class="footer">
@@ -900,10 +948,6 @@
 
   const galleryGrid = document.getElementById('galleryGrid');
 
-  // ============================================================
-  //  ДОБАВЛЯЙ КОТОВ ОДНОЙ СТРОЧКОЙ В МАССИВЕ НИЖЕ:
-  //  { name: 'Имя кота', img: 'https://ссылка.на/фото.jpg' }
-  // ============================================================
   const cats = [
     { name: 'siGMA aura kit', img: 'https://avatars.mds.yandex.net/i?id=cdcf50461c89c6038a73f7f83e46cbdc_l-11374185-images-thumbs&n=33&w=664&h=720' },
     { name: 'HUH', img: 'https://i.ibb.co/60TYCr3m/eac9978d7a59d80b64b6c78a9012426a.jpg' },
@@ -912,7 +956,6 @@
     { name: 'Кit ругается на немецком', img: 'https://i.ibb.co/3Y092Kg7/maxresdefault-2.jpg' },
     { name: 'Кit в кiфiрэ', img: 'https://i.ibb.co/jkyPthfq/4a4b9069584ef25c68839cfe23548ba3.jpg' }
   ];
-  // ============================================================
 
   const cryptoData = {
     btc: {
@@ -1152,25 +1195,25 @@
       formData.append('photo', selectedFile);
       formData.append('caption', `Имя: ${name}`);
 
-      const photoResponse = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendPhoto`, {
+      const response = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendPhoto`, {
         method: 'POST',
         body: formData
       });
 
-      const photoData = await photoResponse.json();
+      const data = await response.json();
 
-      if (photoData.ok) {
-        showSendStatus('Кот успешно отправлен в модерацию!', 'success');
+      if (data.ok) {
+        showSendStatus('✅ Кот успешно отправлен в модерацию!', 'success');
         sendCatName.value = '';
         selectedFile = null;
         filePreview.classList.remove('show');
         fileName.textContent = '';
         sendCatImage.value = '';
       } else {
-        showSendStatus('Ошибка: ' + (photoData.description || 'Неизвестная ошибка'), 'error');
+        showSendStatus('❌ Ошибка: ' + (data.description || 'Неизвестная ошибка'), 'error');
       }
     } catch (error) {
-      showSendStatus('❌ Не удалось отправить через Telegram API (возможно блокировка). Попробуйте с VPN', 'error');
+      showSendStatus('❌ Не удалось отправить. Попробуйте через VPN или позже.', 'error');
     } finally {
       sendCatToBotBtn.disabled = false;
       sendCatToBotBtn.textContent = '📤 Отправить';
